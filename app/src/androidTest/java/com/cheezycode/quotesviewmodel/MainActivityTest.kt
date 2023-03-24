@@ -2,7 +2,10 @@ package com.cheezycode.quotesviewmodel
 
 import android.content.Intent
 import androidx.test.espresso.Espresso.*
-import androidx.test.espresso.action.ViewActions.click
+
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.*
+
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
@@ -33,6 +36,18 @@ class MainActivityTest{
         onView(withId(R.id.floatingActionButton)).perform(click())
         intended(expected)
         Intents.release()
+    }
+
+    @Test
+    fun testNotes(){
+        onView(withId(R.id.nextActivity) ).perform(click())
+
+        onView(withId(R.id.titles) ).perform(typeText("hello"))
+        onView(withId(R.id.description) ).perform(typeText("nitesh"), ViewActions.closeSoftKeyboard())
+
+        onView(withId(R.id.add) ).perform(click())
+        onView(withId(R.id.finalText) ).check(matches(withText("title: hello  descrption: nitesh")))
+
     }
 }
 

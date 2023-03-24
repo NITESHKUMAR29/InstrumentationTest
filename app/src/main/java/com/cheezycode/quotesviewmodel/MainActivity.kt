@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.initializer
@@ -18,6 +19,9 @@ class MainActivity : AppCompatActivity() {
     private val quoteAuthor: TextView
         get() = findViewById(R.id.quoteAuthor)
 
+    private val nextActivity: Button
+        get() = findViewById(R.id.nextActivity)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +33,10 @@ class MainActivity : AppCompatActivity() {
         }
         mainViewModel = ViewModelProvider(this, Factory).get(MainViewModel::class.java)
         setQuote(mainViewModel.getQuote())
+        nextActivity.setOnClickListener {
+            val intent=Intent(this,NotesActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
